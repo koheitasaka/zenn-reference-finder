@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, ExternalLink, BookOpen, ArrowRight } from "lucide-react";
+import { Search, ExternalLink, BookOpen, ArrowRight, Link } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -46,12 +46,12 @@ export default function ZennReferenceFinder() {
   return (
     <div className="flex min-h-screen flex-col items-center bg-gradient-to-b from-white to-orange-50 px-4 py-16">
       <div className="w-full max-w-md md:max-w-xl">
-        <div className="mb-8 text-center">
+        <div className="mb-4 md:mb-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
             <BookOpen className="h-6 w-6 text-[#FFAF59]" />
-            <h1 className="text-3xl font-bold tracking-tight">Zenn Reference Finder</h1>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Zenn Reference Finder</h1>
           </div>
-          <p className="text-muted-foreground">Zenn記事の参照元を簡単に検索</p>
+          <p className="text-muted-foreground text-sm md:text-base">Zenn記事の参照元を簡単に検索</p>
         </div>
 
         <Card className="border-[#FFAF59]/20 shadow-lg">
@@ -62,10 +62,10 @@ export default function ZennReferenceFinder() {
                   placeholder="Zenn記事のURLを入力 (例: https://zenn.dev/...)"
                   value={inputUrl}
                   onChange={(e) => setInputUrl(e.target.value)}
-                  className="pr-10 border-[#FFAF59]/30 focus-visible:ring-[#FFAF59] h-16 text-lg"
+                  className="pr-10 border-[#FFAF59]/30 focus-visible:ring-[#FFAF59] h-16 text-sm md:text-base"
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                  <ExternalLink className="h-4 w-4" />
+                  <Link className="h-4 w-4" />
                 </div>
               </div>
 
@@ -76,7 +76,7 @@ export default function ZennReferenceFinder() {
               >
                 {loading ? (
                   <div className="flex items-center gap-2">
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent text-lg"></div>
                     <span>検索中...</span>
                   </div>
                 ) : (
@@ -95,7 +95,7 @@ export default function ZennReferenceFinder() {
                 {articles.length > 0 ? (
                   <div className="space-y-4">
                     <div className="flex items-center gap-2">
-                      <Badge className="bg-[#FFAF59]">{articles.length}件</Badge>
+                      <Badge className="bg-[#FFAF59] text-md">{articles.length}件</Badge>
                       <h2 className="font-medium">以下の記事で参照されています！</h2>
                     </div>
                     <div className="space-y-3">
@@ -105,10 +105,10 @@ export default function ZennReferenceFinder() {
                           href={article.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-start p-3 rounded-lg border border-[#FFAF59]/20 hover:bg-orange-50 transition-colors"
+                          className="flex items-start p-3 hover:bg-orange-50 transition-colors"
                         >
                           <div className="flex-1">
-                            <h3 className="font-medium text-[#FFAF59] hover:text-[#FF9F40] transition-colors">
+                            <h3 className="font-bold hover:text-[#FF9F40] transition-colors">
                               {article.title}
                             </h3>
                           </div>
