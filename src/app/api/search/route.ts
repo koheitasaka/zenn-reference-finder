@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { findReferencingTitles } from "../../../lib/google-search";
 import { searchZennArticle } from "../../../lib/zenn-api";
-import { ReferenceArticle } from "../../../types/zenn";
 
 export async function POST(request: Request) {
   try {
@@ -15,19 +14,23 @@ export async function POST(request: Request) {
     }
 
     // Web検索で参照元タイトルを取得
-    const titles = await findReferencingTitles(url);
+    const titleAndOgpImageList = await findReferencingTitles(url);
 
     // Zenn APIで正確な記事データを取得
-    const articles: ReferenceArticle[] = (
+    const articles = (
       await Promise.all(
-        titles.map(async (title, index) => {
-          const article = await searchZennArticle(title);
+        titleAndOgpImageList.map(async (titleAndOgpImage) => {
+          const article = await searchZennArticle(titleAndOgpImage.title);
           return article
-            ? { title, url: `https://zenn.dev${article.path}` }
+            ? {
+                title: titleAndOgpImage.title,
+                url: `https://zenn.dev${article.path}`,
+                ogpImage: titleAndOgpImage.ogpImage,
+              }
             : null;
         })
       )
-    ).filter((a): a is ReferenceArticle => a !== null);
+    ).filter((a): a is NonNullable<typeof a> => a !== null);
 
     return NextResponse.json({ articles });
   } catch (error) {

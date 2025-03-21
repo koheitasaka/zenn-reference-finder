@@ -1,4 +1,6 @@
-export async function findReferencingTitles(targetUrl: string): Promise<string[]> {
+import { GoogleSearchResult } from "@/types/googleSearch";
+
+export async function findReferencingTitles(targetUrl: string): Promise<{title: string, ogpImage?: string}[]> {
   const apiKey = process.env.GOOGLE_API_KEY;
   const cseId = process.env.GOOGLE_CSE_ID;
   
@@ -21,9 +23,14 @@ export async function findReferencingTitles(targetUrl: string): Promise<string[]
     }
 
     const data = await response.json();
-    return data.items
-      ?.filter((item: any) => item.link.includes("zenn.dev"))
-      .map((item: any) => item.title) || [];
+    const items = data.items as GoogleSearchResult[];
+
+    return items
+      ?.filter((item) => item.link.includes("zenn.dev"))
+      .map((item) => ({
+        title: item.title,
+        ogpImage: item.pagemap.cse_image[0]?.src,
+      })) || [];
   } catch (error) {
     console.error("Error searching references:", error);
     return [];

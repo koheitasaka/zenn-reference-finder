@@ -16,4 +16,5 @@ export interface ZennSearchResponse {
 export interface ReferenceArticle {
   title: string;
   url: string;
+  ogpImage?: string;
 } 

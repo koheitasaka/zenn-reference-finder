@@ -11,7 +11,6 @@ export async function searchZennArticle(title: string): Promise<ZennArticle | nu
   let data: ZennSearchResponse = await response.json();
   let article = data.articles?.find((a) => a.title === title);
   if (article) {
-    console.log("Found in articles:", article);
     return article;
   }
 
@@ -23,10 +22,8 @@ export async function searchZennArticle(title: string): Promise<ZennArticle | nu
   data = await response.json();
   article = data.scraps?.find((a) => a.title === title);
   if (article) {
-    console.log("Found in scraps:", article);
     return article;
   }
 
-  console.log("No match found for title:", title);
   return null;
 }

@@ -36,8 +36,8 @@ export default function ZennReferenceFinder() {
       const data = await response.json();
       if (data.error) throw new Error(data.error);
       setArticles(data.articles);
-    } catch (err: any) {
-      setError(err.message || "エラーが発生しました。もう一度試してください。");
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "エラーが発生しました。もう一度試してください。");
     } finally {
       setLoading(false);
     }
