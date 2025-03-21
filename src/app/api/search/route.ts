@@ -16,11 +16,11 @@ export async function POST(request: Request) {
 
     // Web検索で参照元タイトルを取得
     const titles = await findReferencingTitles(url);
-
+    console.log(titles.length);
     // Zenn APIで正確な記事データを取得
     const articles: ReferenceArticle[] = (
       await Promise.all(
-        titles.map(async (title) => {
+        titles.map(async (title, index) => {
           const article = await searchZennArticle(title);
           return article
             ? { title, url: `https://zenn.dev${article.path}` }

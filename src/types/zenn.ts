@@ -8,7 +8,8 @@ export interface ZennArticle {
 }
 
 export interface ZennSearchResponse {
-  articles: ZennArticle[];
+  articles?: ZennArticle[];
+  scraps?: ZennArticle[];
   next_page: number | null;
 }
 

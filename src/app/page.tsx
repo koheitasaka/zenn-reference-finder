@@ -44,8 +44,8 @@ export default function ZennReferenceFinder() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-gradient-to-b from-white to-orange-50 p-4">
-      <div className="w-full max-w-md">
+    <div className="flex min-h-screen flex-col items-center bg-gradient-to-b from-white to-orange-50 px-4 py-16">
+      <div className="w-full max-w-md md:max-w-xl">
         <div className="mb-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
             <BookOpen className="h-6 w-6 text-[#FFAF59]" />
@@ -62,7 +62,7 @@ export default function ZennReferenceFinder() {
                   placeholder="Zenn記事のURLを入力 (例: https://zenn.dev/...)"
                   value={inputUrl}
                   onChange={(e) => setInputUrl(e.target.value)}
-                  className="pr-10 border-[#FFAF59]/30 focus-visible:ring-[#FFAF59]"
+                  className="pr-10 border-[#FFAF59]/30 focus-visible:ring-[#FFAF59] h-16 text-lg"
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
                   <ExternalLink className="h-4 w-4" />
@@ -72,7 +72,7 @@ export default function ZennReferenceFinder() {
               <Button
                 type="submit"
                 disabled={loading || !inputUrl}
-                className="w-full bg-[#FFAF59] hover:bg-[#FF9F40] text-white"
+                className="w-full bg-[#FFAF59] hover:bg-[#FF9F40] text-white py-2"
               >
                 {loading ? (
                   <div className="flex items-center gap-2">
@@ -80,7 +80,7 @@ export default function ZennReferenceFinder() {
                     <span>検索中...</span>
                   </div>
                 ) : (
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 font-bold text-lg">
                     <Search className="h-4 w-4" />
                     <span>検索</span>
                   </div>
